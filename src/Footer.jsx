@@ -1,7 +1,9 @@
 import "./App.css";
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import AudioPlayer from "./AudioPlayer";
 
-function Footer() {
+function Footer({ audioEnabled, setAudioEnabled }) {
   // get the dark mode state from local storage
   // if it's not there, set it to false
   // if dark mode is true, set the background color to black
@@ -57,7 +59,14 @@ function Footer() {
           </a>
         </li>
         <li>
-          <a> sound off </a>
+          <a
+            onClick={() => {
+              setAudioEnabled(!audioEnabled);
+            }}
+          >
+            sound {audioEnabled ? "off" : "on"}
+          </a>
+          <AudioPlayer enabled={audioEnabled} />
         </li>
         <li>
           <a href="https://github.com/matthew-hre/ld53"> github repo </a>
@@ -69,5 +78,10 @@ function Footer() {
     </footer>
   );
 }
+
+Footer.propTypes = {
+  audioEnabled: PropTypes.bool,
+  setAudioEnabled: PropTypes.func,
+};
 
 export default Footer;

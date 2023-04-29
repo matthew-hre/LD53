@@ -24,22 +24,21 @@ const firstMessageData = [
     id: 4,
     type: "text",
     message:
-      "If you are unsure of the correct replacement, you may select the 'I don't know' option.",
-    delay: 6000,
+      "Once the email is repaired, it will be delivered to the recipient.",
+    delay: 5000,
   },
   {
     id: 5,
     type: "text",
     message:
-      "Once the email is repaired, it will be delivered to the recipient.",
-    delay: 5000,
+      "You will be monitored for efficiency and accuracy. Please ensure your camera is clear, your microphone is on, and your windows are open.",
+    delay: 0,
   },
   {
     id: 6,
-    type: "text",
-    message:
-      "You will be monitored for efficiency and accuracy. Please ensure your camera is clear, your microphone is on, and your windows are open.",
-    delay: 4000000,
+    type: "result",
+    message: "Performance noted. Please continue to the next email.",
+    delay: 5000,
   },
 ];
 

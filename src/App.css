@@ -22,7 +22,6 @@
   flex: 1;
   width: 100%;
   max-width: 1000px;
-  height: 100%;
   padding-top: 30px;
   padding-left: 30px;
   padding-right: 30px;
@@ -37,7 +36,6 @@
   display: flex;
   flex-direction: row;
   gap: 20px;
-  padding-bottom: 20px;
 }
 
 fieldset {
@@ -65,6 +63,9 @@ legend {
 #email {
   height: 600px;
   flex: 1;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
 }
 
 #repairdetails {
@@ -112,20 +113,29 @@ legend {
   outline: none;
 }
 
+input[disabled] {
+  opacity: 0.2;
+}
+
 #transcript input::placeholder {
   color: #fff;
 }
 
-footer {
-  position: absolute;
-  bottom: 0;
+.light #transcript input {
+  border: 2px solid #000;
+  color: #000;
+}
 
+.light #transcript input::placeholder {
+  color: #000;
+}
+
+footer {
   height: 50px;
   width: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 0 20px;
 }
 
 footer ul {
@@ -138,7 +148,7 @@ footer ul li {
 }
 
 footer ul li:last-child {
-  margin-right: 20px;
+  margin-right: 0;
 }
 
 footer ul li a {
@@ -161,7 +171,7 @@ footer ul li a:hover {
 @media (max-width: 768px) {
   footer {
     flex-direction: column;
-    padding-bottom: 10px;
+    margin-top: 30px;
   }
 
   footer ul {
@@ -169,10 +179,12 @@ footer ul li a:hover {
     justify-content: space-around;
     padding-bottom: 10px;
     flex-wrap: wrap;
+    margin-bottom: 10px;
   }
 
   footer ul li {
-    margin: 0;
+    margin: 0 10px;
+    margin-bottom: 10px;
   }
 }
 
