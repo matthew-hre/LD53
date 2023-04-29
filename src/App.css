@@ -2,10 +2,11 @@
   width: 100%;
   height: 100%;
   z-index: 1;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   mix-blend-mode: screen;
+  object-fit: cover;
   opacity: 0.1;
   user-drag: none;
   -webkit-user-drag: none;
@@ -32,7 +33,93 @@
   background-clip: text;
 }
 
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+fieldset {
+  padding: 12px;
+}
+
+legend {
+  padding: 0 5px;
+}
+
+#transcript {
+  height: 600px;
+  width: 300px;
+  position: relative;
+}
+
+.messages {
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  height: calc(100% - 50px);
+  margin-bottom: 10px;
+  scrollbar-width: none;
+}
+
+#email {
+  height: 600px;
+  flex: 1;
+}
+
+#repairdetails {
+  height: 300px;
+  width: 700px;
+}
+
+#repairsubmit {
+  flex: 1;
+  height: 300px;
+}
+
+.dark .transcript-message,
+.light .user-message {
+  color: #000;
+  background-color: #fff;
+}
+
+.light .transcript-message,
+.dark .user-message {
+  color: #fff;
+  background-color: #000;
+}
+
+.transcript-message {
+  padding: 2px;
+  margin-bottom: 5px;
+  text-shadow: none;
+}
+
+.corrupted {
+  text-shadow: var(--text-glitch);
+}
+
+#transcript input {
+  width: 100%;
+  height: 40px;
+  padding: 5px;
+  border: 2px solid #fff;
+  background-color: transparent;
+  color: #fff;
+}
+
+#transcript input:focus {
+  outline: none;
+}
+
+#transcript input::placeholder {
+  color: #fff;
+}
+
 footer {
+  position: absolute;
+  bottom: 0;
+
   height: 50px;
   width: 100%;
   display: flex;
@@ -81,9 +168,18 @@ footer ul li a:hover {
     width: 100%;
     justify-content: space-around;
     padding-bottom: 10px;
+    flex-wrap: wrap;
   }
 
   footer ul li {
     margin: 0;
   }
+}
+
+.dark a {
+  color: #fff;
+}
+
+.light a {
+  color: #000;
 }

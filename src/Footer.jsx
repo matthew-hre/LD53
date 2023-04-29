@@ -30,7 +30,7 @@ function Footer() {
     } else {
       document.documentElement.style.setProperty(
         "--text-glitch",
-        "0 0 5px rgba(0, 0, 0, 0.6), 1px 1px 2px rgba(255, 0, 0, 0.3), -1px -1px 2px rgba(0, 0, 255, 0.3)"
+        "0 0 5px rgba(0, 0, 0, 0.3), 1px 1px 1px rgba(255, 0, 0, 0.2), -1px -1px 1px rgba(0, 0, 255, 0.2)"
       );
       document.documentElement.style.setProperty(
         "--box-shadow",
@@ -60,10 +60,12 @@ function Footer() {
           <a> sound off </a>
         </li>
         <li>
-          <a> github repo </a>
+          <a href="https://github.com/matthew-hre/ld53"> github repo </a>
+        </li>
+        <li>
+          made in 48 hours for <a href="https://ldjam.com/">ludum dare 53</a>
         </li>
       </ul>
-      - &nbsp;&nbsp;&nbsp;&nbsp;made in 48 hours for ludum dare 53
     </footer>
   );
 }
