@@ -51,7 +51,7 @@ function secondEmail() {
       {
         id: 5,
         key: "pIRd320",
-        values: ["your son", "you", "{USER}", "the monster"],
+        values: ["your son", "me", "the monster"],
         valid: "your son",
       },
     ],
