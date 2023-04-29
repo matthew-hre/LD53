@@ -1,4 +1,4 @@
-import Photocopy from "./assets/Photocopy.jpg";
+import Photocopy from "./assets/photocopy.jpg";
 import "./App.css";
 import Footer from "./Footer";
 import Transcript from "./Transcript.jsx";
