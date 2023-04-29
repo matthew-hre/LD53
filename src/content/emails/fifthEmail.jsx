@@ -45,7 +45,7 @@ function fifthEmail() {
           "off yourself",
           "get your liquor today",
         ],
-        valid: "all liquor is 50% off",
+        valid: "get your liquor today",
       },
     ],
   };

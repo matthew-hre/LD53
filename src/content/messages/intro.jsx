@@ -21,13 +21,22 @@ const introData = [
     id: 4,
     type: "yn",
     message:
+      "Would you care to enable audio for this work station? It is not required, but it may help you work more efficiently.",
+    yes: "Audio enabled. Please continue to the next question.",
+    no: "Decision noted. Audio can be enabled at any time in the menu.",
+    delay: 4000,
+  },
+  {
+    id: 5,
+    type: "yn",
+    message:
       "Do you understand that you will be working with sensitive information?",
     yes: "Great, thanks for your understanding.",
     no: "That's unfortunate. Please refamiliarize yourself with the employee handbook on your next break.",
     delay: 4000,
   },
   {
-    id: 5,
+    id: 6,
     type: "yn",
     message:
       "Do you acknowledge that the emails you read may contain violence, explicit language, and references to self harm?",
@@ -36,7 +45,7 @@ const introData = [
     delay: 4000,
   },
   {
-    id: 6,
+    id: 7,
     type: "yn",
     message: "Do you have any experience with email recovery?",
     yes: "Great, you'll be a natural.",
@@ -44,7 +53,7 @@ const introData = [
     delay: 4000,
   },
   {
-    id: 7,
+    id: 8,
     type: "yn",
     message:
       "Do you consent to any and all necessary information being collected for customer satisfaction purposes?",
@@ -53,7 +62,7 @@ const introData = [
     delay: 4000,
   },
   {
-    id: 8,
+    id: 9,
     type: "text",
     message: "Alright, thanks {USER}. Let's get started.",
     delay: -1,

@@ -45,13 +45,13 @@ function Footer({ audioEnabled, setAudioEnabled }) {
     <footer>
       <ul>
         <li>
-          <a> save </a>
-        </li>
-        <li>
-          <a> load </a>
-        </li>
-        <li>
-          <a> restart </a>
+          <a
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
+            restart
+          </a>
         </li>
         <li>
           <a onClick={toggleTheme}>

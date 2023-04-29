@@ -6,12 +6,20 @@ import Email from "./Email";
 
 import { useState, useEffect, useRef } from "react";
 
-import introData from "./content/intro.jsx";
-import firstMessageData from "./content/firstMessage.jsx";
-import secondMessageData from "./content/secondMessage.jsx";
+import introData from "./content/messages/intro.jsx";
+import firstMessageData from "./content/messages/firstMessage.jsx";
+import secondMessageData from "./content/messages/secondMessage.jsx";
+import thirdMessageData from "./content/messages/thirdMessage.jsx";
+import fourthMessageData from "./content/messages/fourthMessage.jsx";
+import fifthMessageData from "./content/messages/fifthMessage.jsx";
+import sixthMessageData from "./content/messages/sixthMessage.jsx";
 
-import firstEmail from "./content/firstEmail.jsx";
-import secondEmail from "./content/secondEmail.jsx";
+import firstEmail from "./content/emails/firstEmail.jsx";
+import secondEmail from "./content/emails/secondEmail.jsx";
+import thirdEmail from "./content/emails/thirdEmail.jsx";
+import fourthEmail from "./content/emails/fourthEmail.jsx";
+import fifthEmail from "./content/emails/fifthEmail.jsx";
+import sixthEmail from "./content/emails/sixthEmail.jsx";
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -51,9 +59,6 @@ function App() {
               message: "Incorrect. Again.",
             };
             setMessages((prevMessages) => [...prevMessages, newMessage]);
-            setCurrentAnswerIndex(-1);
-            setCurrentKey("");
-            setCurrentAnswer("");
           } else {
             const newMessage = {
               message: "Input verified.",
@@ -80,6 +85,38 @@ function App() {
 
                 setCurrentEmail(secondEmail);
               }
+
+              if (currentData === secondMessageData) {
+                setCurrentData(thirdMessageData);
+                setCurrentMessageIndex(0);
+                setMessages([]);
+
+                setCurrentEmail(thirdEmail);
+              }
+
+              if (currentData === thirdMessageData) {
+                setCurrentData(fourthMessageData);
+                setCurrentMessageIndex(0);
+                setMessages([]);
+
+                setCurrentEmail(fourthEmail);
+              }
+
+              if (currentData === fourthMessageData) {
+                setCurrentData(fifthMessageData);
+                setCurrentMessageIndex(0);
+                setMessages([]);
+
+                setCurrentEmail(fifthEmail);
+              }
+
+              if (currentData === fifthMessageData) {
+                setCurrentData(sixthMessageData);
+                setCurrentMessageIndex(0);
+                setMessages([]);
+
+                setCurrentEmail(sixthEmail);
+              }
             }
           }
         }
@@ -92,15 +129,24 @@ function App() {
         if (answer.toLowerCase() === "y" || answer.toLowerCase() === "yes") {
           copyOfNewMessage.message = copyOfNewMessage.yes;
           setMessages((prevMessages) => [...prevMessages, copyOfNewMessage]);
+          if (currentData[currentMessageIndex - 1].id === 4) {
+            setAudioEnabled(true);
+          }
         } else if (
           answer.toLowerCase() === "n" ||
           answer.toLowerCase() === "no"
         ) {
           copyOfNewMessage.message = copyOfNewMessage.no;
           setMessages((prevMessages) => [...prevMessages, copyOfNewMessage]);
+          if (currentData[currentMessageIndex - 1].id === 4) {
+            setAudioEnabled(false);
+          }
         } else {
           copyOfNewMessage.message = "Invalid inputs will be assumed as yes.";
           setMessages((prevMessages) => [...prevMessages, copyOfNewMessage]);
+          if (currentData[currentMessageIndex - 1].id === 4) {
+            setAudioEnabled(true);
+          }
         }
       }
 

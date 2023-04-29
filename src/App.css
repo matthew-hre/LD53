@@ -66,6 +66,7 @@ legend {
   overflow-y: auto;
   scroll-behavior: smooth;
   scrollbar-width: none;
+  position: relative;
 }
 
 #repairdetails {
@@ -115,6 +116,29 @@ legend {
 
 input[disabled] {
   opacity: 0.2;
+}
+
+.email-bg {
+  width: 100%;
+  height: calc(100% - 30px);
+  opacity: 0.05;
+  object-fit: fill;
+  object-position: center;
+  /* z-index: -1; */
+  position: absolute;
+  top: 30px;
+  left: 0;
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none;
+}
+
+.light .email-bg {
+  filter: invert(1);
 }
 
 #transcript input::placeholder {
