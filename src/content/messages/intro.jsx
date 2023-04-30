@@ -24,7 +24,7 @@ const introData = [
       "Would you care to enable audio for this work station? It is not required, but it may help you work more efficiently.",
     yes: "Audio enabled. Please continue to the next question.",
     no: "Decision noted. Audio can be enabled at any time in the menu.",
-    delay: 4000,
+    delay: 2000,
   },
   {
     id: 5,
@@ -33,7 +33,7 @@ const introData = [
       "Do you understand that you will be working with sensitive information?",
     yes: "Great, thanks for your understanding.",
     no: "That's unfortunate. Please refamiliarize yourself with the employee handbook on your next break.",
-    delay: 4000,
+    delay: 2000,
   },
   {
     id: 6,
@@ -42,7 +42,7 @@ const introData = [
       "Do you acknowledge that the emails you read may contain violence, explicit language, and references to self harm?",
     yes: "Great, let's continue.",
     no: "That's unfortunate. Take a moment to book some time with your NAERC provided counselor.",
-    delay: 4000,
+    delay: 2000,
   },
   {
     id: 7,
@@ -50,7 +50,7 @@ const introData = [
     message: "Do you have any experience with email recovery?",
     yes: "Great, you'll be a natural.",
     no: "That's unfortunate. Please refamiliarize yourself with the employee handbook on your next break.",
-    delay: 4000,
+    delay: 2000,
   },
   {
     id: 8,

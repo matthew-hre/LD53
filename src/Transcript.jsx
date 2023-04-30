@@ -12,7 +12,7 @@ function Transcript({ messages, onAnswer, awaitingInput, audioEnabled }) {
 
     if (audioEnabled) {
       const audio = new Audio(NewMessage);
-      audio.volume = 0.4;
+      audio.volume = 0.2;
       audio.play();
     }
   }, [messages, audioEnabled]);
@@ -50,7 +50,7 @@ function Transcript({ messages, onAnswer, awaitingInput, audioEnabled }) {
             e.key !== "Alt"
           ) {
             const audio = new Audio(Typing);
-            audio.volume = 0.4;
+            audio.volume = 0.2;
             audio.play();
           }
         }}

@@ -13,6 +13,10 @@ import thirdMessageData from "./content/messages/thirdMessage.jsx";
 import fourthMessageData from "./content/messages/fourthMessage.jsx";
 import fifthMessageData from "./content/messages/fifthMessage.jsx";
 import sixthMessageData from "./content/messages/sixthMessage.jsx";
+import seventhMessageData from "./content/messages/seventhMessage.jsx";
+import eighthMessageData from "./content/messages/eighthMessage.jsx";
+import badEndingData from "./content/messages/badEndingMessage.jsx";
+import goodEndingData from "./content/messages/goodEndingMessage.jsx";
 
 import firstEmail from "./content/emails/firstEmail.jsx";
 import secondEmail from "./content/emails/secondEmail.jsx";
@@ -20,6 +24,7 @@ import thirdEmail from "./content/emails/thirdEmail.jsx";
 import fourthEmail from "./content/emails/fourthEmail.jsx";
 import fifthEmail from "./content/emails/fifthEmail.jsx";
 import sixthEmail from "./content/emails/sixthEmail.jsx";
+import lastEmail from "./content/emails/lastEmail.jsx";
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -35,123 +40,168 @@ function App() {
   const [currentAnswerIndex, setCurrentAnswerIndex] = useState(-1);
   const [currentAnswer, setCurrentAnswer] = useState("");
 
+  const [confessionBalance, setConfessionBalance] = useState(0);
+
   let [userName, setUserName] = useState("");
 
   const intervalIdRef = useRef(null);
 
   const onAnswer = (answer) => {
-    if (awaitingInput) {
-      if (currentData[currentMessageIndex - 1].type === "value") {
-        if (currentData[currentMessageIndex - 1].id === 2) {
-          setUserName(toTitleCase(answer));
-        }
+    if (!awaitingInput) {
+      return;
+    }
+
+    if (currentData[currentMessageIndex - 1].type === "value") {
+      if (currentData[currentMessageIndex - 1].id === 2) {
+        setUserName(toTitleCase(answer));
       }
+    }
 
-      if (currentData[currentMessageIndex].type === "result") {
-        if (currentAnswerIndex === -1) {
-          getKeyInputFromUser(answer);
+    if (currentData[currentMessageIndex].type === "result") {
+      if (currentAnswerIndex === -1) {
+        getKeyInputFromUser(answer);
+      } else {
+        if (
+          answer !== "" + currentAnswerIndex &&
+          answer.toLowerCase() !== currentAnswer.toLowerCase() &&
+          currentAnswerIndex !== 1000
+        ) {
+          const newMessage = {
+            message: "Incorrect. Again.",
+          };
+          setMessages((prevMessages) => [...prevMessages, newMessage]);
         } else {
-          if (
-            answer !== "" + currentAnswerIndex &&
-            answer.toLowerCase() !== currentAnswer.toLowerCase()
-          ) {
-            const newMessage = {
-              message: "Incorrect. Again.",
-            };
-            setMessages((prevMessages) => [...prevMessages, newMessage]);
-          } else {
-            const newMessage = {
-              message: "Input verified.",
-            };
+          let newMessage = {
+            message: "",
+          };
 
-            document.getElementById(currentKey).innerText = currentAnswer;
+          let newCurrentAnswer = "";
 
-            // remove the key from the email
-            currentEmail.keys = currentEmail.keys.filter(
-              (key) => key.key !== currentKey
-            );
-
-            setMessages((prevMessages) => [...prevMessages, newMessage]);
-            setCurrentAnswerIndex(-1);
-            setCurrentKey("");
-            setCurrentAnswer("");
-
-            // if there are no more keys, we're done
-            if (currentEmail.keys.length === 0) {
-              if (currentData === firstMessageData) {
-                setCurrentData(secondMessageData);
-                setCurrentMessageIndex(0);
-                setMessages([]);
-
-                setCurrentEmail(secondEmail);
+          if (currentAnswerIndex === 1000) {
+            // get the full key data from the email
+            let fullKeyData = null;
+            currentEmail.keys.find((key) => {
+              if (key.key === currentKey) {
+                fullKeyData = key;
               }
+            });
 
-              if (currentData === secondMessageData) {
-                setCurrentData(thirdMessageData);
-                setCurrentMessageIndex(0);
-                setMessages([]);
-
-                setCurrentEmail(thirdEmail);
+            // is answer a number?
+            if (!isNaN(answer)) {
+              const idx = Number(answer) - 1;
+              if (idx < 0 || idx >= fullKeyData.values.length) {
+                newMessage.message = "Incorrect. Again.";
+                setMessages((prevMessages) => [...prevMessages, newMessage]);
+                return;
               }
-
-              if (currentData === thirdMessageData) {
-                setCurrentData(fourthMessageData);
-                setCurrentMessageIndex(0);
-                setMessages([]);
-
-                setCurrentEmail(fourthEmail);
+              setCurrentAnswer(fullKeyData.values[idx]);
+              newCurrentAnswer = fullKeyData.values[idx];
+            } else {
+              for (let i = 0; i < fullKeyData.values.length; i++) {
+                if (
+                  answer.toLowerCase() === fullKeyData.values[i].toLowerCase()
+                ) {
+                  setCurrentAnswer(fullKeyData.values[i]);
+                }
               }
+            }
 
-              if (currentData === fourthMessageData) {
-                setCurrentData(fifthMessageData);
-                setCurrentMessageIndex(0);
-                setMessages([]);
+            if (newCurrentAnswer === fullKeyData.good) {
+              setConfessionBalance(confessionBalance + 1);
+              console.log("confession balance: " + confessionBalance);
+            } else if (newCurrentAnswer === fullKeyData.bad) {
+              setConfessionBalance(confessionBalance - 1);
+              console.log("confession balance: " + confessionBalance);
+            }
 
-                setCurrentEmail(fifthEmail);
+            if (fullKeyData === null) {
+              newMessage.message = "Incorrect. Again.";
+              setMessages((prevMessages) => [...prevMessages, newMessage]);
+              return;
+            }
+          }
+
+          newMessage.message = "Input verified.";
+
+          document.getElementById(currentKey).innerText =
+            newCurrentAnswer === "" ? currentAnswer : newCurrentAnswer;
+
+          // remove the key from the email
+          currentEmail.keys = currentEmail.keys.filter(
+            (key) => key.key !== currentKey
+          );
+
+          setMessages((prevMessages) => [...prevMessages, newMessage]);
+          setCurrentAnswerIndex(-1);
+          setCurrentKey("");
+          setCurrentAnswer("");
+
+          // if there are no more keys, we're done
+          if (currentEmail.keys.length === 0) {
+            if (currentData === eighthMessageData) {
+              if (confessionBalance < 2) {
+                loadChapter(badEndingData, null);
+              } else {
+                loadChapter(goodEndingData, null);
               }
+            }
 
-              if (currentData === fifthMessageData) {
-                setCurrentData(sixthMessageData);
-                setCurrentMessageIndex(0);
-                setMessages([]);
-
-                setCurrentEmail(sixthEmail);
-              }
+            console.log("no more keys");
+            switch (currentData) {
+              case firstMessageData:
+                loadChapter(secondMessageData, secondEmail);
+                break;
+              case secondMessageData:
+                loadChapter(thirdMessageData, thirdEmail);
+                break;
+              case thirdMessageData:
+                loadChapter(fourthMessageData, fourthEmail);
+                break;
+              case fourthMessageData:
+                loadChapter(fifthMessageData, fifthEmail);
+                break;
+              case fifthMessageData:
+                loadChapter(sixthMessageData, sixthEmail);
+                break;
+              case sixthMessageData:
+                loadChapter(seventhMessageData, null);
+                break;
+              default:
+                break;
             }
           }
         }
       }
+    }
 
-      if (currentData[currentMessageIndex - 1].type === "yn") {
-        const newMessage = currentData[currentMessageIndex - 1];
-        let copyOfNewMessage = { ...newMessage };
+    if (currentData[currentMessageIndex - 1].type === "yn") {
+      const newMessage = currentData[currentMessageIndex - 1];
+      let copyOfNewMessage = { ...newMessage };
 
-        if (answer.toLowerCase() === "y" || answer.toLowerCase() === "yes") {
-          copyOfNewMessage.message = copyOfNewMessage.yes;
-          setMessages((prevMessages) => [...prevMessages, copyOfNewMessage]);
-          if (currentData[currentMessageIndex - 1].id === 4) {
-            setAudioEnabled(true);
-          }
-        } else if (
-          answer.toLowerCase() === "n" ||
-          answer.toLowerCase() === "no"
-        ) {
-          copyOfNewMessage.message = copyOfNewMessage.no;
-          setMessages((prevMessages) => [...prevMessages, copyOfNewMessage]);
-          if (currentData[currentMessageIndex - 1].id === 4) {
-            setAudioEnabled(false);
-          }
-        } else {
-          copyOfNewMessage.message = "Invalid inputs will be assumed as yes.";
-          setMessages((prevMessages) => [...prevMessages, copyOfNewMessage]);
-          if (currentData[currentMessageIndex - 1].id === 4) {
-            setAudioEnabled(true);
-          }
+      if (answer.toLowerCase() === "y" || answer.toLowerCase() === "yes") {
+        copyOfNewMessage.message = copyOfNewMessage.yes;
+        setMessages((prevMessages) => [...prevMessages, copyOfNewMessage]);
+        if (currentData[currentMessageIndex - 1].id === 4) {
+          setAudioEnabled(true);
+        }
+      } else if (
+        answer.toLowerCase() === "n" ||
+        answer.toLowerCase() === "no"
+      ) {
+        copyOfNewMessage.message = copyOfNewMessage.no;
+        setMessages((prevMessages) => [...prevMessages, copyOfNewMessage]);
+        if (currentData[currentMessageIndex - 1].id === 4) {
+          setAudioEnabled(false);
+        }
+      } else {
+        copyOfNewMessage.message = "Invalid inputs will be assumed as yes.";
+        setMessages((prevMessages) => [...prevMessages, copyOfNewMessage]);
+        if (currentData[currentMessageIndex - 1].id === 4) {
+          setAudioEnabled(true);
         }
       }
-
-      setAwaitingInput(false);
     }
+    setAwaitingInput(false);
   };
 
   const getKeyInputFromUser = (answer) => {
@@ -179,7 +229,14 @@ function App() {
         });
         setMessages((prevMessages) => [...prevMessages, ...options]);
         setCurrentKey(key.key);
-        setCurrentAnswer(key.valid);
+        // if last email
+        if (currentData !== eighthMessageData) {
+          setCurrentAnswer(key.valid);
+        } else {
+          setCurrentAnswer("");
+          setCurrentAnswerIndex(1000);
+          foundKey = true;
+        }
       }
     });
 
@@ -217,6 +274,14 @@ function App() {
             setMessages([]);
 
             setCurrentEmail(firstEmail);
+          }
+
+          if (currentData === seventhMessageData) {
+            setCurrentData(eighthMessageData);
+            setCurrentMessageIndex(1);
+            setMessages([]);
+
+            setCurrentEmail(lastEmail);
           }
         }
       }, currentData[currentMessageIndex - 1]?.delay || 250);
@@ -258,6 +323,14 @@ function App() {
     });
   }
 
+  function loadChapter(data, email) {
+    setCurrentData(data);
+    setCurrentMessageIndex(0);
+    setMessages([]);
+
+    setCurrentEmail(email);
+  }
+
   return (
     <>
       <img src={Photocopy} alt="" className="photocopy" />
@@ -269,7 +342,7 @@ function App() {
             audioEnabled={audioEnabled}
             awaitingInput={awaitingInput}
           />
-          <Email email={currentEmail} />
+          <Email email={currentEmail} userName={userName} />
         </div>
         <Footer audioEnabled={audioEnabled} setAudioEnabled={setAudioEnabled} />
       </div>

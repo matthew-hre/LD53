@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import Logo from "./logo.png";
 
-function Email({ email }) {
+function Email({ email, userName }) {
   return (
     <fieldset id="email">
       <legend>Incoming Message</legend>
@@ -10,7 +10,7 @@ function Email({ email }) {
         <div
           className="email"
           dangerouslySetInnerHTML={{
-            __html: email.message,
+            __html: email?.message.replace("{USER}", userName),
           }}
         ></div>
       )}
@@ -20,6 +20,7 @@ function Email({ email }) {
 
 Email.propTypes = {
   email: PropTypes.object,
+  userName: PropTypes.string.isRequired,
 };
 
 export default Email;

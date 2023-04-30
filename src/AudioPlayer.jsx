@@ -9,7 +9,7 @@ function AudioPlayer({ enabled }) {
 
   useEffect(() => {
     if (enabled) {
-      audioRef.current.volume = 0.4;
+      audioRef.current.volume = 0.2;
       audioRef.current.play();
     } else {
       audioRef.current.pause();

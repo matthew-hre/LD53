@@ -3,28 +3,28 @@ const secondMessageData = [
     id: 1,
     type: "text",
     message: "Another message has been selected for you to review.",
-    delay: 5000,
+    delay: 3000,
   },
   {
     id: 2,
     type: "text",
     message:
       "This message has been flagged as urgent, and needs to be done quickly.",
-    delay: 6000,
+    delay: 3000,
   },
   {
     id: 3,
     type: "text",
     message:
       "As before, to repair an email, type in the corrupted token, and select the correct replacement from the given list.",
-    delay: 6000,
+    delay: 4000,
   },
   {
     id: 4,
     type: "text",
     message:
       "Once again, this information is confidential. Do not share it with anyone. We will know.",
-    delay: 5000,
+    delay: 4000,
   },
   {
     id: 5,

@@ -2,9 +2,9 @@ function fifthEmail() {
   return {
     id: 1,
     message: `
-    Subject: BIG BOOZE SALE! 50% OFF ALL LIQUOR!
+    Subject: BIG BOOZE SALE! 50% OFF ALL LIQUOR!<br><br>
 
-    Hello, valued customer! We here at Big Booze are proud to announce our annual sale! All liquor is <span class="corrupted" id="mNe43p0">[mNe43p0]</span>! That's right, <span class="corrupted" id="zZ34p09">[zZ34p09]</span>! This is a limited time offer, so come on down to Big Booze and get your liquor today!<br>
+    Hello, valued customer! We here at Big Booze are proud to announce our annual sale!<br><br>All liquor is <span class="corrupted" id="mNe43p0">[mNe43p0]</span>! That's right, <span class="corrupted" id="zZ34p09">[zZ34p09]</span>! This is a limited time offer, so come on down to Big Booze and get your liquor today!<br>
     <br>
     Come on down to Big Booze, just off Penn Street, and get your liquor today!<br>
     <br>
