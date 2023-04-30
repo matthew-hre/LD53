@@ -8,9 +8,9 @@ function secondEmail() {
     <br><br>
     Afternoon,
     <br><br>
-    I am writing to provide you with a police report regarding a <span class="corrupted" id="t03FhE5">[t03FhE5]</span> that occurred on January 17th at the intersection of McMichael Street and Penn Street. The details of the accident are as follows:
+    I am writing to provide you with a police report regarding a <span class="corrupted" id="t03FhE5">[t03FhE5]</span> that occurred on January 17th at the intersection of McMichael Street and Penn Street, as we have been unable to contact your child for further details. The details of the accident are as follows:
     <br><br>
-    At approximately 2:36pm, a blue 1979 Camaro driven by an <span class="corrupted" id="mM3fl03">[mM3fl03]</span> was traveling westbound on Penn Street and failed to stop at a red light at the intersection of McMichael. As a result, the Camaro collided with a black Dodge vehicle. The make was not identified.
+    At approximately 2:36am, a blue 1979 Camaro driven by an <span class="corrupted" id="mM3fl03">[mM3fl03]</span>, we suspect to be your child, was traveling westbound on Penn Street and failed to stop at a red light at the intersection of McMichael. As a result, the Camaro collided with a black Dodge vehicle. The make was not identified.
     <br><br>
     There were no witnesses to the accident, and the Camaro was found abandoned with <span class="corrupted" id="V04Fq27">[V04Fq27]</span> on the driver's seat. The Dodge was rammed off the road, and rolled down the hill into Queen Lake Resevoir. A body has <span class="corrupted" id="bB3e527">[bB3e527]</span>.
     <br><br>
@@ -28,8 +28,8 @@ function secondEmail() {
       {
         id: 2,
         key: "mM3fl03",
-        values: ["unknown suspect", "ignorant teen", "ASSHOLE"],
-        valid: "unknown suspect",
+        values: ["unconfirmed suspect", "ignorant teen", "ASSHOLE"],
+        valid: "unconfirmed suspect",
       },
       {
         id: 3,
@@ -51,8 +51,8 @@ function secondEmail() {
       {
         id: 5,
         key: "pIRd320",
-        values: ["your son", "me", "the monster"],
-        valid: "your son",
+        values: ["your child", "me", "the monster"],
+        valid: "your child",
       },
     ],
   };
